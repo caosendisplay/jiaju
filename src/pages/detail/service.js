@@ -1,8 +1,8 @@
-import Request from '../../utils/request';
+import { oldRequest } from '../../utils/request';
 
 // 获取商品详情
 export const getProductInfo = params =>
-  Request({
+  oldRequest({
     url: '/product',
     method: 'GET',
     data: params,

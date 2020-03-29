@@ -1,9 +1,9 @@
 import '@tarojs/async-await';
 import Taro, { Component } from '@tarojs/taro';
+import { Provider } from '@tarojs/redux';
 import Home from './pages/home';
 import dva from './utils/dva';
 import models from './models';
-import { Provider } from '@tarojs/redux';
 
 import './styles/base.scss';
 
@@ -28,11 +28,12 @@ class App extends Component {
       'pages/order/index',
       'pages/addressList/index',
       'pages/addressUpdate/index',
+      'pages/test/test',
     ],
     window: {
       backgroundTextStyle: 'dark',
       navigationBarBackgroundColor: '#fff',
-      navigationBarTitleText: '时装衣橱',
+      navigationBarTitleText: '高端家具定制',
       navigationBarTextStyle: 'black',
     },
     tabBar: {
@@ -55,6 +56,12 @@ class App extends Component {
           iconPath: './images/tab/user.png',
           selectedIconPath: './images/tab/user-active.png',
         },
+        {
+          pagePath: 'pages/test/test',
+          text: '测试',
+          iconPath: './images/tab/home.png',
+          selectedIconPath: './images/tab/user-active.png',
+        }
       ],
       color: '#333',
       selectedColor: '#333',

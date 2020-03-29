@@ -1,7 +1,7 @@
-import Request from '../../utils/request';
+import { oldRequest } from '../../utils/request';
 
 export const getAddressList = data =>
-  Request({
+  oldRequest({
     url: '/user/address',
     method: 'GET',
     data,

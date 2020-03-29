@@ -1,8 +1,8 @@
 {
   "miniprogramRoot": "./dist",
-  "projectname": "taro-msparis",
+  "projectname": "高端家具定制",
   "description": "",
-  "appid": "wxd2a161b3c8752b6f",
+  "appid": "wx2a1d1883a299ad3d",
   "setting": {
     "urlCheck": true,
     "es6": false,

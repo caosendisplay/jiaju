@@ -1,21 +1,19 @@
 import Taro from '@tarojs/taro';
-import { baseUrl, noConsole } from '../config';
+import config from '../config';
 
 const request_data = {
   platform: 'wap',
   rent_mode: 2,
 };
 
-export default (options = { method: 'GET', data: {} }) => {
-  if (!noConsole) {
+export const oldRequest = (options = { method: 'GET', data: {} }) => {
+  if (!config.noConsole) {
     console.log(
-      `${new Date().toLocaleString()}【 M=${options.url} 】P=${JSON.stringify(
-        options.data
-      )}`
+      `${new Date().toLocaleString()}【 M=${options.url} 】P=${JSON.stringify(options.data)}`
     );
   }
   return Taro.request({
-    url: baseUrl + options.url,
+    url: config.oldBaseUrl + options.url,
     data: {
       ...request_data,
       ...options.data,
@@ -27,7 +25,7 @@ export default (options = { method: 'GET', data: {} }) => {
   }).then(res => {
     const { statusCode, data } = res;
     if (statusCode >= 200 && statusCode < 300) {
-      if (!noConsole) {
+      if (!config.noConsole) {
         console.log(
           `${new Date().toLocaleString()}【 M=${options.url} 】【接口响应：】`,
           res.data
@@ -43,6 +41,39 @@ export default (options = { method: 'GET', data: {} }) => {
       return data;
     } else {
       throw new Error(`网络请求错误，状态码${statusCode}`);
+    }
+  });
+};
+
+export const v1Request = (options = { method: 'GET', data: {} }) => {
+  if (!config.noConsole) {
+    console.log(
+      `${new Date().toLocaleString()}【 M=${options.url} 】P=${JSON.stringify(options.data)}`
+    );
+    console.log(config);
+  }
+  return Taro.request({
+    url: config.baseUrl + options.url,
+    data: {
+      ...options.data,
+    },
+    header: {
+      'Content-Type': 'application/json',
+    },
+    method: options.method.toUpperCase(),
+  }).then(res => {
+    const { statusCode, data } = res;
+    if (statusCode >= 200 && statusCode < 300) {
+      if (!config.noConsole) {
+        console.log(`${new Date().toLocaleString()}【 M=${options.url} 】【接口响应：】`, res.data);
+      }
+      return data;
+    } else {
+      Taro.showToast({
+        title: `${res.data}~` || res.statusCode,
+        icon: 'none',
+        mask: true,
+      });
     }
   });
 };

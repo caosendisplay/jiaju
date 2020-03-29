@@ -1,5 +1,13 @@
-// 请求连接前缀
-export const baseUrl = 'https://ms-api.caibowen.net';
+import devConfig from "./dev";
+import prodConfig from "./prod";
 
 // 输出日志信息
-export const noConsole = false;
+const commonConfig = {
+  noConsole: true
+};
+
+const config = process.env.NODE_ENV === 'development'
+  ? { ...commonConfig, ...devConfig }
+  : { ...commonConfig, ...prodConfig };
+
+export default config;

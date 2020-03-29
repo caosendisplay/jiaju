@@ -1,7 +1,7 @@
 import Taro, { Component } from '@tarojs/taro';
-import { View, Text, Image } from '@tarojs/components';
+import {View, Text, Image, CoverImage} from '@tarojs/components';
 import { connect } from '@tarojs/redux';
-import MySwiper from '../../components/MySwiper';
+import Banner from "../../components/Banner";
 import GoodsList from '../../components/GoodsList';
 import './index.scss';
 
@@ -22,6 +22,10 @@ class Index extends Component {
     this.props.dispatch({
       type: 'home/product',
     });
+    this.props.dispatch({
+      type: 'home/banner',
+    });
+
 
     // 设置衣袋小红点
     if (this.props.items.length > 0) {
@@ -39,7 +43,7 @@ class Index extends Component {
   //分享
   onShareAppMessage() {
     return {
-      title: '基于Taro框架开发的时装衣橱',
+      title: '高端家具定制',
       path: '/pages/home/index',
     };
   }
@@ -61,7 +65,7 @@ class Index extends Component {
     const { banner, brands, products_list, effects } = this.props;
     return (
       <View className="home-page">
-        <MySwiper banner={banner} home />
+        <Banner images={banner} home />
         <View className="nav-list">
           {brands.map((item, index) => (
             <View className="nav-item" key={index}>

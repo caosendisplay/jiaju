@@ -1,8 +1,8 @@
-import Request from '../../utils/request';
+import { oldRequest } from '../../utils/request';
 
 // 获取省市区列表
 export const getDistricts = data =>
-  Request({
+  oldRequest({
     url: '/common/configs',
     method: 'GET',
     data,
@@ -10,7 +10,7 @@ export const getDistricts = data =>
 
 // 更新地址
 export const updateAddress = data =>
-  Request({
+  oldRequest({
     url: '/user/address',
     method: 'POST',
     data,
@@ -18,7 +18,7 @@ export const updateAddress = data =>
 
 // 删除地址
 export const removeAddress = data =>
-  Request({
+  oldRequest({
     url: '/user/address',
     method: 'DELETE',
     data,

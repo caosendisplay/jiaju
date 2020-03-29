@@ -1,8 +1,8 @@
-import Request from '../../utils/request';
+import { oldRequest } from '../../utils/request';
 
 // 老用户登录
 export const login = data =>
-  Request({
+  oldRequest({
     url: '/user/login',
     method: 'POST',
     data,
@@ -10,7 +10,7 @@ export const login = data =>
 
 // 获取手机验证码
 export const getSms = data =>
-  Request({
+  oldRequest({
     url: '/common/sms',
     method: 'GET',
     data,
@@ -18,7 +18,7 @@ export const getSms = data =>
 
 // 获取语音验证码
 export const getSmsVoice = data =>
-  Request({
+  oldRequest({
     url: '/common/voice',
     method: 'GET',
     data,
@@ -26,7 +26,7 @@ export const getSmsVoice = data =>
 
 // 发券
 export const getReceive = data =>
-  Request({
+  oldRequest({
     url: '/coupon/receive-v2',
     method: 'POST',
     data,

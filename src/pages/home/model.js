@@ -15,11 +15,19 @@ export default {
         yield put({
           type: 'save',
           payload: {
-            banner: data.banner,
             brands: data.brands,
           },
         });
       }
+    },
+    *banner(_, { call, put }) {
+      const data = yield call(homeApi.banner, {});
+      yield put({
+        type: 'save',
+        payload: {
+          banner: data.images
+        }
+      })
     },
     *product(_, { call, put, select }) {
       const { page, products_list } = yield select(state => state.home);
