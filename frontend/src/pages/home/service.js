@@ -15,9 +15,9 @@ export const product = data =>
   });
 
 
-export const banner = data =>
+export const view = data =>
   v1Request({
-    url: '/api/v1/component/home/banner/',
+    url: '/api/v1/component/home/',
     method: 'GET',
     data,
   });

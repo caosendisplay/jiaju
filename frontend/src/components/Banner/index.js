@@ -29,7 +29,7 @@ export default class Banner extends Component {
         {
           images.map((item, index) => (
             <SwiperItem key={index}>
-              <Image mode='widthFix' src={`${item}`} />
+              <Image mode='widthFix' src={`${item.image_url}`} />
             </SwiperItem>
           ))
         }

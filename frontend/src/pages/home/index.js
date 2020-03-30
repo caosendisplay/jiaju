@@ -23,7 +23,7 @@ class Index extends Component {
       type: 'home/product',
     });
     this.props.dispatch({
-      type: 'home/banner',
+      type: 'home/components',
     });
 
 

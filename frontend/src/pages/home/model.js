@@ -20,12 +20,12 @@ export default {
         });
       }
     },
-    *banner(_, { call, put }) {
-      const data = yield call(homeApi.banner, {});
+    *components(_, { call, put }) {
+      const data = yield call(homeApi.view, {});
       yield put({
         type: 'save',
         payload: {
-          banner: data.images
+          banner: data.banner.line_items
         }
       })
     },
