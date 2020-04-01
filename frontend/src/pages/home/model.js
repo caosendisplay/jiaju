@@ -25,7 +25,7 @@ export default {
       yield put({
         type: 'save',
         payload: {
-          banner: data.banner.line_items
+          banner: data.components.banner.line_items
         }
       })
     },
