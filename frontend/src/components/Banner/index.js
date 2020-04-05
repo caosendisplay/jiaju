@@ -16,7 +16,6 @@ export default class Banner extends Component {
 
   render() {
     const { images, home } = this.props;
-    console.log(images, home)
     return (
       <Swiper
         className={!home ? 'swiper-container' : 'swiper'}

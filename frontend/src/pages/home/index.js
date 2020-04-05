@@ -1,9 +1,11 @@
 import Taro, { Component } from '@tarojs/taro';
-import {View, Text, Image, CoverImage} from '@tarojs/components';
+import {View, Text } from '@tarojs/components';
 import { connect } from '@tarojs/redux';
 import Banner from "../../components/Banner";
+import BannerDescription from "../../components/BannerDescription";
 import GoodsList from '../../components/GoodsList';
 import './index.scss';
+import ContactDialog from "../../components/ContactDialog";
 
 @connect(({ home, cart, loading }) => ({
   ...home,
@@ -62,23 +64,23 @@ class Index extends Component {
   }
 
   render() {
-    const { banner, brands, products_list, effects } = this.props;
+    const { banner, products_list, effects } = this.props;
     return (
       <View className="home-page">
-        <Banner images={banner} home />
-        <View className="nav-list">
-          {brands.map((item, index) => (
-            <View className="nav-item" key={index}>
-              <Image mode="widthFix" src={item.image_src} />
-            </View>
-          ))}
+        <View className="banner-view">
+          <Banner images={banner} home />
+          <BannerDescription />
         </View>
-        {/* 流量主广告 */}
-        {Taro.getEnv() === Taro.ENV_TYPE.WEAPP && (
-          <ad unit-id="adunit-dc1c0a38156fa412" />
-        )}
-        <Text className="recommend">为你推荐</Text>
-        <GoodsList list={products_list} loading={effects['home/product']} />
+
+        <View className="contact-view">
+          <Text className="contact-text">联系我们</Text>
+          <ContactDialog />
+        </View>
+
+        <View className="case-view">
+          <Text className="recommend">工程案例</Text>
+          <GoodsList list={products_list} loading={effects['home/product']} />
+        </View>
       </View>
     );
   }
