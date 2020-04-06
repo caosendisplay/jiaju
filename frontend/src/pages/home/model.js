@@ -6,6 +6,8 @@ export default {
     banner: [],
     brands: [],
     products_list: [],
+    case_list: [],
+    current_cases: [],
     page: 1,
   },
   effects: {
@@ -47,6 +49,40 @@ export default {
         });
       }
     },
+    *fetchCaseList(_, { put }) {
+      const case_list = [
+        { 'id': '0', 'title': '中式' },
+        { 'id': '1', 'title': '中式' },
+        { 'id': '2', 'title': '中式' },
+        { 'id': '3', 'title': '中式' },
+        { 'id': '4', 'title': '中式' },
+        { 'id': '5', 'title': '中式' },
+        { 'id': '6', 'title': '中式' },
+      ];
+      yield put({
+        type: 'save',
+        payload: {
+          case_list: case_list
+        }
+      })
+    },
+    *fetchFeaturedCases(_, { put }) {
+      const featured_cases = [
+          { id: 1, title: '中式花园', image_url: 'http://m.baitesi.cn/Uploads/Content/2018-01-17/5a5f0a918dd7f.jpg' },
+          { id: 1, title: '中式花园', image_url: 'http://m.baitesi.cn/Uploads/Content/2018-01-17/5a5f0a918dd7f.jpg' },
+          { id: 1, title: '中式花园', image_url: 'http://m.baitesi.cn/Uploads/Content/2018-01-17/5a5f0a918dd7f.jpg' },
+          { id: 1, title: '中式花园', image_url: 'http://m.baitesi.cn/Uploads/Content/2018-01-17/5a5f0a918dd7f.jpg' },
+          { id: 1, title: '中式花园', image_url: 'http://m.baitesi.cn/Uploads/Content/2018-01-17/5a5f0a918dd7f.jpg' },
+          { id: 1, title: '中式花园', image_url: 'http://m.baitesi.cn/Uploads/Content/2018-01-17/5a5f0a918dd7f.jpg' },
+      ];
+      yield put({
+        type: 'save',
+        payload: {
+          current_cases: featured_cases
+        }
+      })
+
+    }
   },
   reducers: {
     save(state, { payload }) {

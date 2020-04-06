@@ -1,0 +1,34 @@
+@import '../../styles/mixin';
+
+.horizontal-scroll-list {
+  @include fj(center);
+
+  width: 100%;
+  white-space: nowrap;
+  flex-wrap: nowrap;
+
+  .horizontal-scroll-list-container {
+    display: inline-block;
+    width: 280px;
+    height: 400px;
+
+    .horizontal-scroll-list-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-right: 10px;
+
+      .horizontal-scroll-list-title {
+        width: 100%;
+        height: 42px;
+        text-align: center;
+        color: #fff;
+        background-color: rgba(0,0,0,.5);
+        font-size: 28px;
+        position: relative;
+        bottom: 42px;
+        left: 0;
+      }
+    }
+  }
+}

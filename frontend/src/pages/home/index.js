@@ -1,11 +1,13 @@
 import Taro, { Component } from '@tarojs/taro';
-import {View, Text } from '@tarojs/components';
+import { View } from '@tarojs/components';
 import { connect } from '@tarojs/redux';
 import Banner from "../../components/Banner";
 import BannerDescription from "../../components/BannerDescription";
-import GoodsList from '../../components/GoodsList';
 import './index.scss';
 import ContactDialog from "../../components/ContactDialog";
+import SubHeader from "../../components/SubHeader";
+import HorizontalScrollHeader from "../../components/HorizontalScrollHeader";
+import HorizontalScrollList from "../../components/HorizontalScrollList";
 
 @connect(({ home, cart, loading }) => ({
   ...home,
@@ -26,6 +28,12 @@ class Index extends Component {
     });
     this.props.dispatch({
       type: 'home/components',
+    });
+    this.props.dispatch({
+      type: 'home/fetchCaseList',
+    });
+    this.props.dispatch({
+      type: 'home/fetchFeaturedCases'
     });
 
 
@@ -64,7 +72,7 @@ class Index extends Component {
   }
 
   render() {
-    const { banner, products_list, effects } = this.props;
+    const { banner, case_list, current_cases } = this.props;
     return (
       <View className="home-page">
         <View className="banner-view">
@@ -73,14 +81,17 @@ class Index extends Component {
         </View>
 
         <View className="contact-view">
-          <Text className="contact-text">联系我们</Text>
+          <SubHeader text="联系我们" />
           <ContactDialog />
         </View>
 
         <View className="case-view">
-          <Text className="recommend">工程案例</Text>
-          <GoodsList list={products_list} loading={effects['home/product']} />
+          <SubHeader text="工程案例" />
+          <HorizontalScrollHeader headers={case_list} />
+          <HorizontalScrollList items={current_cases} />
         </View>
+
+        <View className="bottom-padding-view" />
       </View>
     );
   }
