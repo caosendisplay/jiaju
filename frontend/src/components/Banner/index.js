@@ -6,19 +6,19 @@ import './index.scss';
 export default class Banner extends Component {
   static propTypes = {
     images: PropTypes.array,
-    home: PropTypes.bool,
+    name: PropTypes.string,
   };
 
   static defaultProps = {
     images: [],
-    home: false,
+    name: '',
   };
 
   render() {
-    const { images, home } = this.props;
+    const { images, name } = this.props;
     return (
       <Swiper
-        className={!home ? 'swiper-container' : 'swiper'}
+        className={`swiper-${name}`}
         circular
         indicatorDots
         indicatorColor='#999'

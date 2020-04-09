@@ -36,11 +36,15 @@ export default class BannerDescription extends Component {
   render() {
     const { texts } = this.props;
     return (
-      <View className="nav-list">
+      <View className="banner-description at-row">
         {texts.map((item) => (
-          <View className="nav-item" key={item.index}>
-            <Text>{item.line1}</Text>
-            <Text>{item.line2}</Text>
+          <View className="banner-description__item at-col at-col-3 at-row" key={item.index}>
+            <Text className="banner-description__text at-col at-col-12">
+              {item.line1}
+            </Text>
+            <Text className="banner-description__text at-col at-col-12">
+              {item.line2}
+            </Text>
           </View>
         ))}
       </View>

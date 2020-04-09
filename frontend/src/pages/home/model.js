@@ -6,8 +6,7 @@ export default {
     banner: [],
     brands: [],
     products_list: [],
-    case_list: [],
-    current_cases: [],
+    cases: [],
     page: 1,
   },
   effects: {
@@ -22,12 +21,17 @@ export default {
         });
       }
     },
-    *components(_, { call, put }) {
-      const data = yield call(homeApi.view, {});
+    *components(_, { put }) {
+      // const data = yield call(homeApi.view, {});
+      const data = [
+        { image_url: 'http://m.baitesi.cn/Uploads/Content/2018-01-17/5a5f0a918dd7f.jpg' },
+        { image_url: 'http://m.baitesi.cn/Uploads/Content/2018-01-17/5a5f0a918dd7f.jpg' },
+        { image_url: 'http://m.baitesi.cn/Uploads/Content/2018-01-17/5a5f0a918dd7f.jpg' },
+      ]
       yield put({
         type: 'save',
         payload: {
-          banner: data.components.banner.line_items
+          banner: data
         }
       })
     },
@@ -50,39 +54,66 @@ export default {
       }
     },
     *fetchCaseList(_, { put }) {
-      const case_list = [
-        { 'id': '0', 'title': '中式' },
-        { 'id': '1', 'title': '中式' },
-        { 'id': '2', 'title': '中式' },
-        { 'id': '3', 'title': '中式' },
-        { 'id': '4', 'title': '中式' },
-        { 'id': '5', 'title': '中式' },
-        { 'id': '6', 'title': '中式' },
+      const cases = [
+        {
+          title: "标签页1",
+          banner: [
+            { id: 0, image_url: "https://picsum.photos/400/250"},
+            { id: 0, image_url: "https://picsum.photos/400/250"},
+            { id: 0, image_url: "https://picsum.photos/400/250"},
+            { id: 0, image_url: "https://picsum.photos/400/250"},
+          ]
+        },
+        {
+          title: "标签页2",
+          banner: [
+            { id: 0, image_url: "https://picsum.photos/400/250"},
+            { id: 0, image_url: "https://picsum.photos/400/250"},
+          ]
+        },
+        {
+          title: "标签页3",
+          banner: [
+            { id: 0, image_url: "https://i.picsum.photos/id/479/400/250.jpg"},
+            { id: 0, image_url: "https://i.picsum.photos/id/479/400/250.jpg"},
+            { id: 0, image_url: "https://i.picsum.photos/id/479/400/250.jpg"},
+          ]
+        },
+        {
+          title: "标签页4",
+          banner: [
+            { id: 0, image_url: "https://picsum.photos/400/250"},
+            { id: 0, image_url: "https://picsum.photos/400/250"},
+            { id: 0, image_url: "https://picsum.photos/400/250"},
+            { id: 0, image_url: "https://picsum.photos/400/250"},
+          ]
+        },
+        {
+          title: "标签页5",
+          banner: [
+            { id: 0, image_url: "https://picsum.photos/400/250"},
+            { id: 0, image_url: "https://picsum.photos/400/250"},
+            { id: 0, image_url: "https://picsum.photos/400/250"},
+            { id: 0, image_url: "https://picsum.photos/400/250"},
+          ]
+        },
+        {
+          title: "标签页1",
+          banner: [
+            { id: 0, image_url: "https://picsum.photos/400/250"},
+            { id: 0, image_url: "https://picsum.photos/400/250"},
+            { id: 0, image_url: "https://picsum.photos/400/250"},
+            { id: 0, image_url: "https://picsum.photos/400/250"},
+          ]
+        },
       ];
       yield put({
-        type: 'save',
+        type: "save",
         payload: {
-          case_list: case_list
+          cases: cases
         }
-      })
+      });
     },
-    *fetchFeaturedCases(_, { put }) {
-      const featured_cases = [
-          { id: 1, title: '中式花园', image_url: 'http://m.baitesi.cn/Uploads/Content/2018-01-17/5a5f0a918dd7f.jpg' },
-          { id: 1, title: '中式花园', image_url: 'http://m.baitesi.cn/Uploads/Content/2018-01-17/5a5f0a918dd7f.jpg' },
-          { id: 1, title: '中式花园', image_url: 'http://m.baitesi.cn/Uploads/Content/2018-01-17/5a5f0a918dd7f.jpg' },
-          { id: 1, title: '中式花园', image_url: 'http://m.baitesi.cn/Uploads/Content/2018-01-17/5a5f0a918dd7f.jpg' },
-          { id: 1, title: '中式花园', image_url: 'http://m.baitesi.cn/Uploads/Content/2018-01-17/5a5f0a918dd7f.jpg' },
-          { id: 1, title: '中式花园', image_url: 'http://m.baitesi.cn/Uploads/Content/2018-01-17/5a5f0a918dd7f.jpg' },
-      ];
-      yield put({
-        type: 'save',
-        payload: {
-          current_cases: featured_cases
-        }
-      })
-
-    }
   },
   reducers: {
     save(state, { payload }) {

@@ -1,17 +1,11 @@
 @import '../../styles/mixin';
 
-.nav-list {
-  @include fj(center);
-  flex-wrap: wrap;
-  margin-top: 20px;
-  .nav-item {
-    width: 24%;
-    margin: 0 0 0 0;
-    text {
-      display: block;
-      color: #666;
-      font-size: 26px;
-      line-height: 36px;
-    }
+.banner-description {
+  &__item {
+    height: 100px;
+  }
+
+  &__text {
+    width: 100%;
   }
 }
