@@ -1,11 +1,26 @@
-@import '../../styles/mixin';
+@import "../../styles/mixin";
+@import "../../styles/theme.scss";
 
 .sub-header {
+  display: inline-block;
+
   .sub-header-text {
     display: block;
-    width: 100%;
-    text-align: center;
+    width: inherit;
+    text-align: left;
     margin: 30px 0;
     font-size: 36px;
+
+    &:before {
+      content: "";
+      display: inline-block;
+      margin-left: 10px;
+      margin-right: 10px;
+      width: 5px;
+      height: 30px;
+      background-color: $color-brand;
+      box-shadow: 0 0.14933rem 0.256rem 0 rgba(97, 144, 232, 0.2);
+      border-radius: 1px;
+    }
   }
 }
