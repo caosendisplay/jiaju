@@ -63,7 +63,7 @@ class Index extends Component {
 
         <View className="section case-view">
           <SubHeader text="工程案例" />
-          <ScrollSelectBannerView cases={cases}/>
+          <ScrollSelectBannerView cases={cases} />
         </View>
 
         <View className="section contact-view">
