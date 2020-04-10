@@ -1,7 +1,7 @@
 import Taro from "@tarojs/taro";
 
 export default {
-  namespace: "cases",
+  namespace: "product",
   state: {
     featured: [],
   },

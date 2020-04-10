@@ -11,24 +11,28 @@ export default class BannerDescription extends Component {
   static defaultProps = {
     texts: [
       {
-        index: "banner-description-year",
-        line1: "30年",
-        line2: "asdkljasd"
+        id: "banner-description-year",
+        image_url: null,
+        short_description: "30年",
+        description: "asdkljasd"
       },
       {
-        index: "banner-description-space",
-        line1: "45000m²",
-        line2: "sdlkjadlkajs"
+        id: "banner-description-space",
+        image_url: null,
+        short_description: "45000m²",
+        description: "sdlkjadlkajs"
       },
       {
-        index: "banner-description-team",
-        line1: "500+",
-        line2: "asdlhasjhd"
+        id: "banner-description-team",
+        image_url: null,
+        short_description: "500+",
+        description: "asdlhasjhd"
       },
       {
-        index: "banner-description-revenue",
-        line1: "1.5亿",
-        line2: "asdakqwh"
+        id: "banner-description-revenue",
+        image_url: null,
+        short_description: "1.5亿",
+        description: "asdakqwh"
       }
     ],
   };
@@ -36,15 +40,18 @@ export default class BannerDescription extends Component {
   render() {
     const { texts } = this.props;
     return (
-      <View className="banner-description at-row">
-        {texts.map((item) => (
-          <View className="banner-description__item at-col at-col-3 at-row" key={item.index}>
-            <Text className="banner-description__text at-col at-col-12">
-              {item.line1}
-            </Text>
-            <Text className="banner-description__text at-col at-col-12">
-              {item.line2}
-            </Text>
+      <View className="banner-description nav-list">
+        {texts.map((item, index) => (
+          <View className="nav-item-container" >
+            {index > 0 ? <View className="nav-bar" /> : "" }
+            <View className="nav-item" key={item.id}>
+              <Text className="banner-description__text">
+                {item.short_description}
+              </Text>
+              <Text className="banner-description__text">
+                {item.description}
+              </Text>
+            </View>
           </View>
         ))}
       </View>
