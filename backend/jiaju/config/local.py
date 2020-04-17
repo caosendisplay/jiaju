@@ -13,6 +13,7 @@ class Local(Common):
     ]
     INSTALLED_APPS = Common.INSTALLED_APPS
     INSTALLED_APPS += (
+        'uritemplate',
         'corsheaders',
         'django_nose',
     )

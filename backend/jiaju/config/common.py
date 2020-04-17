@@ -25,6 +25,7 @@ class Common(Configuration):
         # Your apps
         'jiaju.users',
         'jiaju.component',
+        'jiaju.cases',
 
     )
 
@@ -68,10 +69,10 @@ class Common(Configuration):
     # General
     APPEND_SLASH = False
     TIME_ZONE = 'UTC'
-    LANGUAGE_CODE = 'en-us'
+    LANGUAGE_CODE = 'zh-hans'
     # If you set this to False, Django will make some optimizations so as not
     # to load the internationalization machinery.
-    USE_I18N = False
+    USE_I18N = True
     USE_L10N = True
     USE_TZ = True
     LOGIN_REDIRECT_URL = '/'

@@ -1,18 +1,11 @@
 @import '../../styles/mixin';
 
 .contact-form {
-    width: 95%;
-    margin: 0 auto;
+  width: 95%;
+  margin: auto;
+  display: block;
 
-  .contact-form-view {
-
-    .contact-form-input {
-    }
-
-    .contact-form-description {
-    }
-
-    .contact-form-submit {
-    }
+  .contact-form-submit {
+    margin-top: 10px;
   }
 }

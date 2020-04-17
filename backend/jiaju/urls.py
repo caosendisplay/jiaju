@@ -15,6 +15,7 @@ router.register(r'component', ViewViewSet)
 
 api_urlpatterns = [
     re_path('^component/(?P<view>[^/.]+)/(?P<name>[^/.]+)/$', ComponentViewSet.as_view({'get': 'retrieve'})),
+    re_path('^case/', include('jiaju.cases.urls')),
     path('', include(router.urls))
 ]
 
