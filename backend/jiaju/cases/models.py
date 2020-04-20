@@ -1,5 +1,6 @@
 import uuid
 from django.db import models
+from django.utils.safestring import mark_safe
 from django.utils.translation import gettext_lazy as _
 from ..utils import upload_and_rename
 
@@ -37,7 +38,7 @@ class CasePicture(models.Model):
     uuid = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     create_at = models.DateTimeField(_('创建时间'), auto_now_add=True)
     update_at = models.DateTimeField(_('修改时间'), auto_now=True)
-    case = models.ForeignKey(Case, related_name='images', on_delete=models.SET_NULL, null=True)
+    case = models.ForeignKey(Case, verbose_name='案例', related_name='images', on_delete=models.SET_NULL, null=True)
     image = models.ImageField(upload_to=upload_and_rename, verbose_name=_('图片'))
     description = models.CharField(_('描述'), max_length=80, null=True, blank=True)
     featured = models.BooleanField(_('首页展示'), default=False)
@@ -46,3 +47,7 @@ class CasePicture(models.Model):
     class Meta:
         verbose_name = _('案例图片')
         verbose_name_plural = _('案例图片')
+
+    def image_tag(self):
+        return mark_safe('<img src="%s" width="150" height="150" />' % (self.image.url))
+    image_tag.short_description = '图片预览'
