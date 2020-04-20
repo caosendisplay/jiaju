@@ -34,13 +34,14 @@ export default class ScrollSelectBannerView extends Component {
       <View className="scroll-select-banner-view">
         <AtTabs
           current={this.state.current}
-          scroll
+          scroll={cases.length > 4}
           tabList={cases}
           onClick={this.handleClick.bind(this)}
         >
           {cases.map((c, index) => (
+            // TODO: put description on top of images.
             <AtTabsPane current={this.state.current} index={index}>
-              <Banner images={c.banner} name="case" />
+              <Banner images={c.images} name="case" />
             </AtTabsPane>
           ))}
         </AtTabs>

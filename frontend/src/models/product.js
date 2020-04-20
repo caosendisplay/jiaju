@@ -8,10 +8,11 @@ export default {
 
   effects: {
     *fetchFeatured(_, { put }) {
+      console.log('product/fetchFeatured');
       const featured = [
         {
           title: "标签页1",
-          banner: [
+          images: [
             { id: 0, image_url: "https://picsum.photos/400/250"},
             { id: 0, image_url: "https://picsum.photos/400/250"},
             { id: 0, image_url: "https://picsum.photos/400/250"},
@@ -20,14 +21,14 @@ export default {
         },
         {
           title: "标签页2",
-          banner: [
+          images: [
             { id: 0, image_url: "https://picsum.photos/400/250"},
             { id: 0, image_url: "https://picsum.photos/400/250"},
           ]
         },
         {
           title: "标签页3",
-          banner: [
+          images: [
             { id: 0, image_url: "https://i.picsum.photos/id/479/400/250.jpg"},
             { id: 0, image_url: "https://i.picsum.photos/id/479/400/250.jpg"},
             { id: 0, image_url: "https://i.picsum.photos/id/479/400/250.jpg"},
@@ -35,7 +36,7 @@ export default {
         },
         {
           title: "标签页4",
-          banner: [
+          images: [
             { id: 0, image_url: "https://picsum.photos/400/250"},
             { id: 0, image_url: "https://picsum.photos/400/250"},
             { id: 0, image_url: "https://picsum.photos/400/250"},
@@ -44,7 +45,7 @@ export default {
         },
         {
           title: "标签页5",
-          banner: [
+          images: [
             { id: 0, image_url: "https://picsum.photos/400/250"},
             { id: 0, image_url: "https://picsum.photos/400/250"},
             { id: 0, image_url: "https://picsum.photos/400/250"},
@@ -53,7 +54,7 @@ export default {
         },
         {
           title: "标签页1",
-          banner: [
+          images: [
             { id: 0, image_url: "https://picsum.photos/400/250"},
             { id: 0, image_url: "https://picsum.photos/400/250"},
             { id: 0, image_url: "https://picsum.photos/400/250"},

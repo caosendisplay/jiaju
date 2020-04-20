@@ -46,12 +46,14 @@ class Index extends Component {
 
   render() {
     const { home, cases, product } = this.props;
-    console.log(home, cases, product);
+    console.log(home);
+    console.log(cases);
+    console.log(product);
     return (
       <View className="home-page">
         <View className="section banner-view">
           <View className="banner">
-            <Banner images={home.banner} name="home" hasDots={false} />
+            <Banner images={home.banner} name="home" />
           </View>
           <View className="banner-description">
             <BannerDescription texts={home.banner_description} />
@@ -71,7 +73,7 @@ class Index extends Component {
         {home.about_us.map((i, index) => (
           <View className="section about-us-view" key={index}>
             <SubHeader text={i.short_description} />
-            <Banner images={[i]} name="about-us" hasDots={false} />
+            <Banner images={[i]} name="about-us" />
           </View>
         ))}
 

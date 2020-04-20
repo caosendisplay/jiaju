@@ -7,29 +7,27 @@ export default class Banner extends Component {
   static propTypes = {
     images: PropTypes.array,
     name: PropTypes.string,
-    hasDots: PropTypes.bool,
   };
 
   static defaultProps = {
     images: [],
     name: '',
-    hasDots: true
   };
 
   render() {
-    const { images, name, hasDots } = this.props;
+    const { images, name } = this.props;
     return (
       <Swiper
         className={`swiper-${name}`}
         circular
-        indicatorDots={hasDots}
+        indicatorDots={images.length > 1}
         indicatorColor='#999'
         indicatorActiveColor='#bf708f'
         autoplay
       >
         {
-          images.map((item, index) => (
-            <SwiperItem key={index}>
+          images.map((item) => (
+            <SwiperItem key={item.id}>
               <Image mode='widthFix' src={`${item.image_url}`} />
             </SwiperItem>
           ))
