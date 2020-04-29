@@ -50,7 +50,6 @@ export const v1Request = (options = { method: 'GET', data: {} }) => {
     console.log(
       `${new Date().toLocaleString()}【 M=${options.url} 】P=${JSON.stringify(options.data)}`
     );
-    console.log(config);
   }
   return Taro.request({
     url: config.baseUrl + options.url,

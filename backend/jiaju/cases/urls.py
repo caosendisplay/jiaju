@@ -1,11 +1,12 @@
 from django.urls import path, re_path, include
 from rest_framework.routers import DefaultRouter
 
-from jiaju.cases.views import CategoryView, CaseView, FeaturedCaseView
+from jiaju.cases.views import CategoryView, CaseView, CaseDetailedView, FeaturedCaseView
 
 router = DefaultRouter()
 router.register(r'category', CategoryView)
-router.register(r'', CaseView)
+router.register(r'(?P<category>[0-9]+)', CaseView)
+router.register(r'(?P<category>[0-9]+)', CaseDetailedView)
 
 urlpatterns = [
     re_path(r'featured/$', FeaturedCaseView.as_view({'get': 'list'})),

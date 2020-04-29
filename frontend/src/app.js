@@ -16,6 +16,7 @@ class App extends Component {
   config = {
     pages: [
       'pages/home/index',
+      'pages/case/index',
       'pages/cart/index',
       'pages/user/index',
       'pages/detail/index',
@@ -44,8 +45,8 @@ class App extends Component {
           selectedIconPath: './images/tab/home-active.png',
         },
         {
-          pagePath: 'pages/cart/index',
-          text: '衣袋',
+          pagePath: 'pages/case/index',
+          text: '案例',
           iconPath: './images/tab/cart.png',
           selectedIconPath: './images/tab/cart-active.png',
         },

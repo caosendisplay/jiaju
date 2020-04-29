@@ -10,13 +10,14 @@ class Category(models.Model):
     create_at = models.DateTimeField(_('创建时间'), auto_now_add=True)
     update_at = models.DateTimeField(_('修改时间'), auto_now=True)
     name = models.CharField(_("名称"), max_length=80, unique=True)
+    image = models.ImageField(upload_to=lambda i, fn: upload_and_rename("{}-cover".format(i.name), fn), verbose_name=_('图片'))
 
     def __str__(self):
         return self.name
 
     class Meta:
-        verbose_name = _('类型')
-        verbose_name_plural = _('类型')
+        verbose_name = _('案例类型')
+        verbose_name_plural = _('案例类型')
 
 
 class Case(models.Model):
@@ -39,7 +40,7 @@ class CasePicture(models.Model):
     create_at = models.DateTimeField(_('创建时间'), auto_now_add=True)
     update_at = models.DateTimeField(_('修改时间'), auto_now=True)
     case = models.ForeignKey(Case, verbose_name='案例', related_name='images', on_delete=models.SET_NULL, null=True)
-    image = models.ImageField(upload_to=upload_and_rename, verbose_name=_('图片'))
+    image = models.ImageField(upload_to=lambda i, fn: upload_and_rename(i.pk, fn), verbose_name=_('图片'))
     description = models.CharField(_('描述'), max_length=80, null=True, blank=True)
     featured = models.BooleanField(_('首页展示'), default=False)
     cover = models.BooleanField(_('封面展示'), default=False)

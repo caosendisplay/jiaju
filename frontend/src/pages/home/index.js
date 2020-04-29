@@ -10,12 +10,11 @@ import ScrollSelectBannerView from "../../components/ScrollSelectBannerView";
 
 import "./index.scss";
 
-@connect(({ home, cart, cases, product, loading }) => ({
+@connect(({ home, cart, cases, product }) => ({
   home,
   cart,
   cases,
-  product,
-  loading
+  product
 }))
 class Index extends Component {
   config = {
@@ -46,9 +45,6 @@ class Index extends Component {
 
   render() {
     const { home, cases, product } = this.props;
-    console.log(home);
-    console.log(cases);
-    console.log(product);
     return (
       <View className="home-page">
         <View className="section banner-view">

@@ -36,22 +36,32 @@ class FeaturedCategorySerializer(serializers.ModelSerializer):
 
 class CategorySerializer(serializers.ModelSerializer):
     title = serializers.CharField(source='name')
+    cover = serializers.SerializerMethodField()
 
     class Meta:
         model = Category
-        fields = ('id', 'title', )
+        fields = ('id', 'title', 'cover', )
+
+    def get_cover(self, obj):
+        request = self.context.get('request')
+        return request.build_absolute_uri(obj.image.url)
 
 
 class CaseSerializer(serializers.ModelSerializer):
-    images = CasePictureSerializer(many=True, read_only=True)
     cover = serializers.SerializerMethodField()
-    category = CategorySerializer()
 
     class Meta:
         model = Case
-        fields = ('id', 'images', 'cover', 'name', 'category')
+        fields = ('id', 'cover', 'name')
 
     def get_cover(self, obj):
         return CasePictureSerializer(
             obj.images.order_by('-cover', '-update_at').first(), context=self.context).data
 
+
+class CaseDetailedSerializer(CaseSerializer):
+    images = CasePictureSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Case
+        fields = ('id', 'images', 'name')

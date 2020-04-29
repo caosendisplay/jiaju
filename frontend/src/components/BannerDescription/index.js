@@ -45,10 +45,10 @@ export default class BannerDescription extends Component {
           <View className="nav-item-container" >
             {index > 0 ? <View className="nav-bar" /> : "" }
             <View className="nav-item" key={item.id}>
-              <Text className="banner-description__text">
+              <Text className="nav-text">
                 {item.short_description}
               </Text>
-              <Text className="banner-description__text">
+              <Text className="nav-text">
                 {item.description}
               </Text>
             </View>

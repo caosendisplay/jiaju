@@ -30,16 +30,16 @@
       position: absolute;
       top: 20%;
     }
-    text {
+    .nav-text {
       display: block;
       margin-left: 15px;
       font-size: 26px;
       line-height: 30px;
     }
-    text:first-child {
+    .nav-text:first-child {
       font-size: 38px;
     }
-    text:last-child {
+    .nav-text:last-child {
       margin-top: 10px;
     }
   }

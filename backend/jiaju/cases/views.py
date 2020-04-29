@@ -3,9 +3,10 @@ from rest_framework import mixins
 from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework.permissions import AllowAny
+from rest_framework import pagination
 
 from .models import Category, Case, CasePicture
-from .serializers import CategorySerializer, CaseSerializer, FeaturedCategorySerializer
+from .serializers import CategorySerializer, CaseSerializer, CaseDetailedSerializer,FeaturedCategorySerializer
 
 
 class CategoryView(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
@@ -20,10 +21,31 @@ class CategoryView(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.Ge
         return Response(serializer.data)
 
 
-class CaseView(mixins.RetrieveModelMixin, viewsets.GenericViewSet):
+class CaseView(mixins.ListModelMixin, viewsets.GenericViewSet):
     permission_classes = (AllowAny, )
     queryset = Case.objects.all()
     serializer_class = CaseSerializer
+
+    def get_queryset(self):
+        queryset = self.queryset
+        category_id = self.kwargs.get('category', None)
+        if category_id is not None:
+            queryset = queryset.filter(category=category_id)
+        return queryset
+
+
+class CaseDetailedView(mixins.RetrieveModelMixin, viewsets.GenericViewSet):
+    permission_classes = (AllowAny, )
+    queryset = Case.objects.all()
+    serializer_class = CaseDetailedSerializer
+    pagination.PageNumberPagination.page_size = 2
+
+    def get_queryset(self):
+        queryset = self.queryset
+        category_id = self.kwargs.get('category', None)
+        if category_id is not None:
+            queryset = queryset.filter(category=category_id)
+        return queryset
 
 
 class FeaturedCaseView(mixins.ListModelMixin, viewsets.GenericViewSet):
