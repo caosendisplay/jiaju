@@ -1,4 +1,13 @@
 
 .cases-categories-view {
 
+  .cases-card-view {
+    display: block;
+    text-align: center;
+
+    &__img {
+      width: 98%;
+      border-radius: 10px;
+    }
+  }
 }

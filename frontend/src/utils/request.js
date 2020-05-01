@@ -45,28 +45,27 @@ export const oldRequest = (options = { method: 'GET', data: {} }) => {
   });
 };
 
-export const v1Request = (options = { method: 'GET', data: {} }) => {
+export const v1Request = (url, method = 'GET', data = {}) => {
   if (!config.noConsole) {
     console.log(
-      `${new Date().toLocaleString()}【 M=${options.url} 】P=${JSON.stringify(options.data)}`
+      `${new Date().toLocaleString()}【 M=${url} 】P=${JSON.stringify(data)}`
     );
   }
   return Taro.request({
-    url: config.baseUrl + options.url,
+    url: config.baseUrl + url,
     data: {
-      ...options.data,
+      ...data,
     },
     header: {
       'Content-Type': 'application/json',
     },
-    method: options.method.toUpperCase(),
+    method: method.toUpperCase(),
   }).then(res => {
-    const { statusCode, data } = res;
-    if (statusCode >= 200 && statusCode < 300) {
+    if (res.statusCode >= 200 && res.statusCode < 300) {
       if (!config.noConsole) {
-        console.log(`${new Date().toLocaleString()}【 M=${options.url} 】【接口响应：】`, res.data);
+        console.log(`${new Date().toLocaleString()}【 M=${url} 】【接口响应：】`, res.data);
       }
-      return data;
+      return res.data;
     } else {
       Taro.showToast({
         title: `${res.data}~` || res.statusCode,

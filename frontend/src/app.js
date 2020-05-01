@@ -1,5 +1,5 @@
 import Taro, { Component } from '@tarojs/taro';
-import { Provider } from '@tarojs/redux';
+import { Provider, connect } from '@tarojs/redux';
 import Home from './pages/home';
 import dva from './utils/dva';
 import models from './models';
@@ -12,6 +12,7 @@ const dvaApp = dva.createApp({
 });
 const store = dvaApp.getStore();
 
+@connect(({}) => ({}))
 class App extends Component {
   config = {
     pages: [
@@ -70,7 +71,11 @@ class App extends Component {
     },
   };
 
-  componentDidMount() {}
+  componentDidMount() {
+    this.props.dispatch({
+      type: "api_config/fetch"
+    })
+  }
 
   render() {
     return (

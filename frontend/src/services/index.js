@@ -1,3 +1,4 @@
-import cases from './cases';
+import * as cases from './cases';
+import * as config from './api_config';
 
-export default [cases, ];
+export default [cases, config, ];

@@ -47,7 +47,7 @@ export default {
       })
     },
     *fetchCategories(_, { call, put, select }) {
-      const data = yield call(fetchCategories, {});
+      const data = yield call(fetchCategories);
       const { selected } = yield select((state) => state.cases);
       if (selected === -1) {
         yield put({

@@ -38,7 +38,6 @@ class CaseDetailedView(mixins.RetrieveModelMixin, viewsets.GenericViewSet):
     permission_classes = (AllowAny, )
     queryset = Case.objects.all()
     serializer_class = CaseDetailedSerializer
-    pagination.PageNumberPagination.page_size = 2
 
     def get_queryset(self):
         queryset = self.queryset

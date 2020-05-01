@@ -1,30 +1,24 @@
 import {v1Request} from "../utils/request";
 
-export const view = data =>
-  v1Request({
-    url: "/api/v1/component/home/",
-    method: "GET",
-    data
-  });
+export const view = () =>
+  v1Request(
+    "/api/v1/component/home/",
+  );
 
-export const fetchCategories = data =>
-  v1Request({
-    url: "/api/v1/case/category/",
-    method: "GET",
-    data
-  });
+export const fetchCategories = () =>
+  v1Request(
+    "/api/v1/case/category/",
+  );
 
-export const fetchFeatured = data =>
-  v1Request({
-    url: "/api/v1/case/featured/",
-    method: "GET",
-    data
-  });
+export const fetchFeatured = () =>
+  v1Request(
+    "/api/v1/case/featured/",
+  );
 
 export const fetchCases = data =>
-  v1Request({
-    url: `/api/v1/case/${data.category_id}/`,
-    method: "GET",
-    data: { page: data.page }
-  });
+  v1Request(
+    `/api/v1/case/${data.category_id}/`,
+    "GET",
+    { page: data.page }
+  );
 
