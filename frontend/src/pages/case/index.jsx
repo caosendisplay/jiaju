@@ -1,5 +1,5 @@
 import Taro, {Component} from "@tarojs/taro";
-import {Image, View} from "@tarojs/components";
+import {Image, Text, View} from "@tarojs/components";
 import {connect} from "@tarojs/redux";
 import {AtTabs, AtTabsPane, AtNavBar, AtPagination, AtActivityIndicator} from "taro-ui";
 
@@ -70,12 +70,17 @@ class CasePage extends Component {
             : <View>
             <View className='at-row at-row--wrap, cases-categories-view'>
             {current.results.map(c =>
-              <View className='at-col at-col-12 cases-card-view'>
+              <View className='at-col at-col-12 cases-card-view'
+                    onClick={() => Taro.navigateTo({url: `/pages/caseDetail/index?id=${c.id}`})}>
                 <Image
                   className='cases-card-view__img'
                   src={c.cover.image_url}
                   model='aspectFit'
+
                 />
+                <View className='cases-card-view__box'>
+                  <Text className='cases-card-view__box__name'>{c.name}</Text>
+                </View>
               </View>
             )}
             </View>

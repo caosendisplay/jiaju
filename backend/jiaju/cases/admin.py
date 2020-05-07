@@ -1,5 +1,9 @@
 from django.contrib import admin
-from .models import Category, Case, CasePicture
+from .models import Category, Case, CasePicture, CaseDetailedDescription
+from nested_admin.nested import NestedTabularInline
+from nested_admin.polymorphic import NestedStackedPolymorphicInline, NestedPolymorphicModelAdmin
+from ..common.models import Article
+from ..common.admin import ArticleAdmin, SectionInlineAdmin
 
 
 class CasePictureAdmin(admin.ModelAdmin):
@@ -9,16 +13,20 @@ class CasePictureAdmin(admin.ModelAdmin):
     ordering = ('-case__category', '-case', '-update_at', '-create_at')
 
 
-class CasePictureInlineAdmin(admin.TabularInline):
+class CategoryAdmin(admin.ModelAdmin):
+    model = Category
+
+
+class CasePictureInlineAdmin(NestedTabularInline):
     model = CasePicture
 
 
-class CaseAdmin(admin.ModelAdmin):
-    inlines = [CasePictureInlineAdmin, ]
+class CaseDetailedDescriptionAdminInline(NestedTabularInline):
+    model = CaseDetailedDescription
 
 
-class CategoryAdmin(admin.ModelAdmin):
-    model = Category
+class CaseAdmin(NestedPolymorphicModelAdmin):
+    inlines = [CasePictureInlineAdmin, CaseDetailedDescriptionAdminInline]
 
 
 admin.site.register(Case, CaseAdmin)

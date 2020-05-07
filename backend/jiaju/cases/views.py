@@ -39,13 +39,6 @@ class CaseDetailedView(mixins.RetrieveModelMixin, viewsets.GenericViewSet):
     queryset = Case.objects.all()
     serializer_class = CaseDetailedSerializer
 
-    def get_queryset(self):
-        queryset = self.queryset
-        category_id = self.kwargs.get('category', None)
-        if category_id is not None:
-            queryset = queryset.filter(category=category_id)
-        return queryset
-
 
 class FeaturedCaseView(mixins.ListModelMixin, viewsets.GenericViewSet):
     permission_classes = (AllowAny, )

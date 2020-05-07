@@ -6,7 +6,7 @@ from jiaju.cases.views import CategoryView, CaseView, CaseDetailedView, Featured
 router = DefaultRouter()
 router.register(r'category', CategoryView)
 router.register(r'(?P<category>[0-9]+)', CaseView)
-router.register(r'(?P<category>[0-9]+)', CaseDetailedView)
+router.register(r'detail', CaseDetailedView)
 
 urlpatterns = [
     re_path(r'featured/$', FeaturedCaseView.as_view({'get': 'list'})),

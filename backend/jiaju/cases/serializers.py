@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from .models import Category, Case, CasePicture
+from ..common.serializers import ArticleSerializer
 
 
 class CasePictureSerializer(serializers.ModelSerializer):
@@ -61,7 +62,11 @@ class CaseSerializer(serializers.ModelSerializer):
 
 class CaseDetailedSerializer(CaseSerializer):
     images = CasePictureSerializer(many=True, read_only=True)
+    detailed_description = serializers.SerializerMethodField()
 
     class Meta:
         model = Case
-        fields = ('id', 'images', 'name')
+        fields = ('id', 'images', 'name', 'detailed_description')
+
+    def get_detailed_description(self, obj):
+        return ArticleSerializer(obj.casedetaileddescription.article, context=self.context).data

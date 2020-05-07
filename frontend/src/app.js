@@ -18,6 +18,7 @@ class App extends Component {
     pages: [
       'pages/home/index',
       'pages/case/index',
+      'pages/caseDetail/index',
       'pages/cart/index',
       'pages/user/index',
       'pages/detail/index',
