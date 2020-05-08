@@ -15,9 +15,7 @@ export const product = data =>
   });
 
 
-export const view = data =>
-  v1Request({
-    url: '/api/v1/component/home/',
-    method: 'GET',
-    data,
-  });
+export const getView = () =>
+  v1Request(
+    '/api/v1/component/home/'
+  );

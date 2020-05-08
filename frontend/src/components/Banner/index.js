@@ -18,7 +18,7 @@ export default class Banner extends Component {
     const { images, name } = this.props;
     return (
       <Swiper
-        className={`swiper-${name}`}
+        className={`swiper-container swiper-${name}`}
         circular
         indicatorDots={images.length > 1}
         indicatorColor='#999'

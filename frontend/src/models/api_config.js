@@ -3,7 +3,9 @@ import { fetchConfig } from "../services/api_config";
 
 export default {
   namespace: "api_config",
-  state: {},
+  state: {
+    page_size: 10
+  },
 
   effects: {
     *fetch(_, { call, put }) {

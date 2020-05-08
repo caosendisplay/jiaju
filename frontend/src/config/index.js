@@ -6,8 +6,8 @@ const commonConfig = {
   noConsole: true
 };
 
-const config = process.env.NODE_ENV === 'production'
-  ? { ...commonConfig, ...prodConfig }
-  : { ...commonConfig, ...devConfig };
+const config = process.env.NODE_ENV === 'development'
+  ? { ...commonConfig, ...devConfig }
+  : { ...commonConfig, ...prodConfig };
 
 export default config;

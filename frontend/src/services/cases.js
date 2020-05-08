@@ -22,3 +22,8 @@ export const fetchCases = data =>
     { page: data.page }
   );
 
+export const fetchCaseDetail = data =>
+  v1Request(
+    `/api/v1/case/detail/${data.case_id}/`,
+  );
+

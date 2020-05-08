@@ -1,5 +1,5 @@
 const prodConfig  = {
-  baseUrl: 'https://jiaju.2cn.io'
+  baseUrl: 'https://jiaju.caosen.com'
 };
 
 export default prodConfig;

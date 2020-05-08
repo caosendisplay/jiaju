@@ -1,19 +1,17 @@
 import Taro, {Component} from "@tarojs/taro";
-import {View} from "@tarojs/components";
+import {Image, View} from "@tarojs/components";
 import {connect} from "@tarojs/redux";
+import {AtActivityIndicator} from "taro-ui";
 
-import Banner from "../../components/Banner";
 import BannerDescription from "../../components/BannerDescription";
 import ContactDialog from "../../components/ContactDialog";
 import SubHeader from "../../components/SubHeader";
 import ScrollSelectBannerView from "../../components/ScrollSelectBannerView";
 
 import "./index.scss";
-import {AtActivityIndicator} from "taro-ui";
 
-@connect(({home, cart, cases, product, loading}) => ({
+@connect(({home, cases, product, loading}) => ({
   home,
-  cart,
   cases,
   product,
   loading
@@ -48,11 +46,15 @@ class Index extends Component {
 
   render() {
     const {home, cases, product, loading} = this.props;
+    console.log(loading.effects['home/components'], home);
     return (
       <View className="home-page">
         <View className="section banner-view">
           <View className="banner">
-            <Banner images={home.banner} name="home"/>
+            {loading.effects['home/components'] === false
+              ? <Image src={home.banner[0].image_url} mode="widthFix"/>
+              : <AtActivityIndicator mode='center' content='加载中...'/>
+            }
           </View>
           <View className="banner-description">
             <BannerDescription texts={home.banner_description}/>
@@ -61,22 +63,24 @@ class Index extends Component {
 
         <View className="section case-view">
           <SubHeader text="工程案例" />
-          {loading.effects['cases/fetchFeatured']
-            ? <AtActivityIndicator mode='center' content='加载中...' />
-            : <ScrollSelectBannerView cases={cases.featured} />}
+          {loading.effects['cases/fetchFeatured'] === false
+            ? <ScrollSelectBannerView cases={cases.featured} />
+            : <AtActivityIndicator mode='center' content='加载中...' />
+          }
         </View>
 
         <View className="section product-view">
           <SubHeader text="产品中心"/>
-          {loading.effects['product/fetchFeatured']
-            ? <AtActivityIndicator mode='center' content='加载中...' />
-            : <ScrollSelectBannerView cases={product.featured}/>}
+          {loading.effects['product/fetchFeatured'] === false
+            ? <ScrollSelectBannerView cases={product.featured}/>
+            : <AtActivityIndicator mode='center' content='加载中...' />
+          }
         </View>
 
         {home.about_us.map((i, index) => (
-          <View className="section about-us-view" key={index}>
+          <View className="section about-us-view" key={`about-us-${index}`}>
             <SubHeader text={i.short_description}/>
-            <Banner images={[i]} name="about-us"/>
+            <Image src={i.image_url} mode="widthFix"/>
           </View>
         ))}
 

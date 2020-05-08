@@ -1,13 +1,15 @@
 import Taro, {Component} from "@tarojs/taro";
-import {Image, Text, View} from "@tarojs/components";
+import {Image, View} from "@tarojs/components";
+import {AtActivityIndicator} from "taro-ui";
 import {connect} from "@tarojs/redux";
 
 import "./index.scss";
+import Banner from "../../components/Banner";
+import SubHeader from "../../components/SubHeader";
 
 
-@connect(({cases, api_config, loading}) => ({
+@connect(({cases, loading}) => ({
   cases,
-  api_config,
   loading
 }))
 class CaseDetailPage extends Component {
@@ -21,6 +23,12 @@ class CaseDetailPage extends Component {
   }
 
   componentDidMount = () => {
+    this.props.dispatch({
+      type: "cases/fetchCaseDetail",
+      payload: {
+        case_id: this.$router.params.id
+      }
+    })
   };
 
   componentWillUnmount() {
@@ -32,43 +40,75 @@ class CaseDetailPage extends Component {
   componentDidHide() {
   }
 
-  render() {
+  renderContent(content) {
+    if (content.type === 'h1') {
+      return <View className='at-article__h1'>{content.detail}</View>
+    } else if (content.type === 'h2') {
+      return <View className='at-article__h2'>{content.detail}</View>
+    } else if (content.type === 'h3') {
+      return <View className='at-article__h3'>{content.detail}</View>
+    } else if (content.type === 'paragraph') {
+      return <View className='at-article__p'>{content.detail}</View>
+    } else if (content.type === 'info') {
+      return <View className='at-article__info'>{content.detail}</View>
+    } else if (content.type === 'img') {
+      return <Image className='at-article__img' src={content.detail} mode='widthFix' />
+    } else {
+      return;
+    }
+}
+
+renderDetailedDescription(case_id, detailed_description) {
+    if (!detailed_description) return;
     return (
       <View className='at-article'>
-        <View className='at-article__h1'>
-          这是一级标题这是一级标题
-        </View>
-        <View className='at-article__info'>
-          2017-05-07&nbsp;&nbsp;&nbsp;这是作者
-        </View>
         <View className='at-article__content'>
-          <View className='at-article__section'>
-            <View className='at-article__p'>
-              这是文本段落。这是文本段落。
+          {detailed_description.sections.map((section, idx) => (
+            <View className='at-article__section' key={`${case_id}-description-section-${idx}`} >
+              {section.contents.map((content) => this.renderContent(content))}
             </View>
-            <Image
-              className='at-article__img'
-              src='https://jdc.jd.com/img/400x400'
-              mode='widthFix' />
-          </View>
+          ))}
+        </View>
+      </View>
+    )
+  }
 
-          <View className='at-article__section'>
-            <View className='at-article__h1'>
-              这是一级标题这是一级标题
+  render() {
+    const { loading } = this.props;
+    if (loading.effects['cases/fetchCaseDetail']) {
+      return (
+        <AtActivityIndicator mode='center' content='加载中...' />
+      )
+    }
+    const { current_case } = this.props.cases;
+    return (
+      <View className='case-detail-view at-row--wrap'>
+        <View className='at-col at-col-12'>
+          <Banner images={current_case.images} name="case-detail"/>
+        </View>
+        <View className='at-col at-col-12'>
+          <View className='at-article'>
+            <View className='at-article__content'>
+              <View className='at-article__section'>
+                <View className='at-article__h2'>
+                  {current_case.name}
+                </View>
+                <View className='at-article__p'>
+                  {current_case.short_description ? current_case.short_description : ''}
+                </View>
+              </View>
             </View>
-            <View className='at-article__h2'>这是二级标题</View>
-            <View className='at-article__h3'>这是三级标题</View>
-            <View className='at-article__p'>
-              这是文本段落。这是文本段落。这是文本段落。这是文本段落。这是文本段落。这是文本段落。这是文本段落。这是文本落。这是文本段落。1234567890123456789012345678901234567890 ABCDEFGHIJKLMNOPQRSTUVWXYZ
-            </View>
-            <View className='at-article__p'>
-              这是文本段落。这是文本段落。
-            </View>
-            <Image
-              className='at-article__img'
-              src='https://jdc.jd.com/img/400x400'
-              mode='widthFix' />
           </View>
+        </View>
+        { current_case.detailed_description ?
+          <View className='at-col at-col-12'>
+            <SubHeader text="详情描述" />
+          </View>
+          :
+          <View />
+        }
+        <View className='at-col at-col-12'>
+          {this.renderDetailedDescription(current_case.id, current_case.detailed_description)}
         </View>
       </View>
     )

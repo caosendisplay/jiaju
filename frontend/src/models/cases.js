@@ -1,10 +1,11 @@
 import Taro from "@tarojs/taro";
-import { fetchCases, fetchCategories, fetchFeatured } from "../services/cases";
+import { fetchCases, fetchCaseDetail, fetchCategories, fetchFeatured } from "../services/cases";
 
 export default {
   namespace: "cases",
   state: {
     cases: {},
+    current_case: {},
     categories: [],
     featured: [],
     selected: -1
@@ -43,6 +44,15 @@ export default {
               ...data
             },
           }
+        }
+      })
+    },
+    *fetchCaseDetail({ payload }, { call, put }) {
+      const data = yield call(fetchCaseDetail, { case_id: payload.case_id });
+      yield put({
+        type: 'save',
+        payload: {
+          current_case: data
         }
       })
     },
