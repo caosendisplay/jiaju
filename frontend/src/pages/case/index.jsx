@@ -1,7 +1,7 @@
 import Taro, {Component} from "@tarojs/taro";
 import {Image, Text, View} from "@tarojs/components";
 import {connect} from "@tarojs/redux";
-import {AtTabs, AtTabsPane, AtNavBar, AtPagination, AtActivityIndicator} from "taro-ui";
+import {AtTabs, AtTabsPane, AtPagination, AtActivityIndicator} from "taro-ui";
 
 import "./case.scss";
 
@@ -44,7 +44,6 @@ class CasePage extends Component {
 
   onPageChange(value) {
     const {current} = value;
-    console.log("<<<<<<onPageChange>>>>>>>", value);
     this.props.dispatch({
       type: "cases/fetchCases",
       payload: {

@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from .models import View, Component, ComponentLineItem
+from ..utils import build_absolute_uri
 
 
 class ComponentLineItemSerializer(serializers.ModelSerializer):
@@ -10,8 +11,10 @@ class ComponentLineItemSerializer(serializers.ModelSerializer):
         fields = ("image_url", "short_description", "description")
 
     def get_image_url(self, obj):
+        if not obj.image:
+            return None
         request = self.context.get('request')
-        return request.build_absolute_uri(obj.image.url)
+        return build_absolute_uri(request, obj.image.url)
 
 
 class ComponentSerializer(serializers.ModelSerializer):

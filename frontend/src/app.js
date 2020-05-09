@@ -23,6 +23,7 @@ class App extends Component {
       'pages/home/index',
       'pages/case/index',
       'pages/caseDetail/index',
+      'pages/product/index',
       'pages/test/test',
     ],
     window: {
@@ -46,8 +47,8 @@ class App extends Component {
           selectedIconPath: './images/tab/cart-active.png',
         },
         {
-          pagePath: 'pages/test/test',
-          text: '测试',
+          pagePath: 'pages/product/index',
+          text: '产品',
           iconPath: './images/tab/home.png',
           selectedIconPath: './images/tab/user-active.png',
         },

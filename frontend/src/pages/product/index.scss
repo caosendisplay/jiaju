@@ -1,0 +1,14 @@
+
+.product-scroll-view {
+  height: 100%;
+
+  &__card {
+    height: 450px;
+    background-color: rgb(241,241,241);
+    color: #333;
+  }
+}
+
+.bottom-padding-view {
+  height: 50px;
+}

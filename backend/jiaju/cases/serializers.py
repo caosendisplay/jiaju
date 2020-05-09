@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from .models import Category, Case, CasePicture
 from ..common.serializers import ArticleSerializer
+from ..utils import build_absolute_uri
 
 
 class CasePictureSerializer(serializers.ModelSerializer):
@@ -13,7 +14,7 @@ class CasePictureSerializer(serializers.ModelSerializer):
 
     def get_image_url(self, obj):
         request = self.context.get('request')
-        return request.build_absolute_uri(obj.image.url)
+        return build_absolute_uri(request, obj.image.url)
 
 
 class FeaturedCategorySerializer(serializers.ModelSerializer):
@@ -45,7 +46,7 @@ class CategorySerializer(serializers.ModelSerializer):
 
     def get_cover(self, obj):
         request = self.context.get('request')
-        return request.build_absolute_uri(obj.image.url)
+        return build_absolute_uri(request, obj.image.url)
 
 
 class CaseSerializer(serializers.ModelSerializer):
@@ -69,4 +70,7 @@ class CaseDetailedSerializer(CaseSerializer):
         fields = ('id', 'images', 'name', 'detailed_description')
 
     def get_detailed_description(self, obj):
-        return ArticleSerializer(obj.casedetaileddescription.article, context=self.context).data
+        if hasattr(obj, 'casedetaileddescription'):
+            return ArticleSerializer(obj.casedetaileddescription.article, context=self.context).data
+        else:
+            return None

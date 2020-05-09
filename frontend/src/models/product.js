@@ -4,11 +4,114 @@ export default {
   namespace: "product",
   state: {
     featured: [],
+    page: 1,
+    products: []
   },
 
   effects: {
+    *fetchProducts(_, { select, call, put }) {
+      console.log('product/fetchProducts');
+      const { page, products } = yield select((state) => state.product);
+      const data = {
+        count: 6,
+        next: 'http://localhost',
+        previous: 'http://localhost',
+        results: [
+          {
+            id: 1,
+            cover: {
+              id: "f9f1eecb-12e9-4c26-b54c-c88744a094d5",
+              image_url: "https://jiaju.caosen.com/media/images/f9f1eecb-12e9-4c26-b54c-c88744a094d5.jpg"
+            },
+            name: "展览展示"
+          },
+          {
+            id: 2,
+            cover: {
+              id: "f9f1eecb-12e9-4c26-b54c-c88744a094d5",
+              image_url: "https://jiaju.caosen.com/media/images/f9f1eecb-12e9-4c26-b54c-c88744a094d5.jpg"
+            },
+            name: "展览展示"
+          },
+          {
+            id: 3,
+            cover: {
+              id: "f9f1eecb-12e9-4c26-b54c-c88744a094d5",
+              image_url: "https://jiaju.caosen.com/media/images/f9f1eecb-12e9-4c26-b54c-c88744a094d5.jpg"
+            },
+            name: "展览展示"
+          },
+          {
+            id: 4,
+            cover: {
+              id: "f9f1eecb-12e9-4c26-b54c-c88744a094d5",
+              image_url: "https://jiaju.caosen.com/media/images/f9f1eecb-12e9-4c26-b54c-c88744a094d5.jpg"
+            },
+            name: "展览展示"
+          },
+          {
+            id: 5,
+            cover: {
+              id: "f9f1eecb-12e9-4c26-b54c-c88744a094d5",
+              image_url: "https://jiaju.caosen.com/media/images/f9f1eecb-12e9-4c26-b54c-c88744a094d5.jpg"
+            },
+            name: "展览展示"
+          },
+          {
+            id: 6,
+            cover: {
+              id: "f9f1eecb-12e9-4c26-b54c-c88744a094d5",
+              image_url: "https://jiaju.caosen.com/media/images/f9f1eecb-12e9-4c26-b54c-c88744a094d5.jpg"
+            },
+            name: "展览展示"
+          },
+          {
+            id: 6,
+            cover: {
+              id: "f9f1eecb-12e9-4c26-b54c-c88744a094d5",
+              image_url: "https://jiaju.caosen.com/media/images/f9f1eecb-12e9-4c26-b54c-c88744a094d5.jpg"
+            },
+            name: "展览展示"
+          },
+          {
+            id: 6,
+            cover: {
+              id: "f9f1eecb-12e9-4c26-b54c-c88744a094d5",
+              image_url: "https://jiaju.caosen.com/media/images/f9f1eecb-12e9-4c26-b54c-c88744a094d5.jpg"
+            },
+            name: "展览展示"
+          },
+          {
+            id: 6,
+            cover: {
+              id: "f9f1eecb-12e9-4c26-b54c-c88744a094d5",
+              image_url: "https://jiaju.caosen.com/media/images/f9f1eecb-12e9-4c26-b54c-c88744a094d5.jpg"
+            },
+            name: "展览展示"
+          },
+          {
+            id: 6,
+            cover: {
+              id: "f9f1eecb-12e9-4c26-b54c-c88744a094d5",
+              image_url: "https://jiaju.caosen.com/media/images/f9f1eecb-12e9-4c26-b54c-c88744a094d5.jpg"
+            },
+            name: "展览展示"
+          },
+        ]
+      }
+      const delay = (ms) => new Promise((resolve) => {
+        setTimeout(resolve, ms);
+      });
+      yield call(delay, 3000);
+      yield put({
+        type: "save",
+        payload: {
+          page: page + 1,
+          products: products.concat(data.results)
+        }
+      })
+    },
     *fetchFeatured(_, { put }) {
-      console.log('product/fetchFeatured');
       const featured = [
         {
           title: "标签页1",
