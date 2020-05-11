@@ -50,7 +50,7 @@ export default class Banner extends Component {
         {
           images.map((item) => (
             <SwiperItem key={item.id}>
-              <Image mode='widthFix' className='swiper-container__img' src={`${item.image_url}`} onLoad={this.onImageLoad}/>
+              <Image mode='widthFix' className='swiper-container__img' src={`${item.image_url}`} onLoad={this.onImageLoad.bind(this)}/>
             </SwiperItem>
           ))
         }
