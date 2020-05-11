@@ -1,13 +1,16 @@
 from django.contrib import admin
+from nested_admin.forms import SortableHiddenMixin
+from nested_admin.nested import NestedTabularInline, NestedModelAdmin
 from .models import View, Component, ComponentLineItem
 
 
-class ComponentLineItemAdmin(admin.TabularInline):
+class ComponentLineItemAdmin(SortableHiddenMixin, NestedTabularInline):
     model = ComponentLineItem
+    sortable_field_name = 'ordering'
     extra = 1
 
 
-class ComponentAdmin(admin.ModelAdmin):
+class ComponentAdmin(NestedModelAdmin):
     inlines = [ComponentLineItemAdmin, ]
     list_display = ('name', 'description', )
     # readonly_fields = ('view', 'name', )

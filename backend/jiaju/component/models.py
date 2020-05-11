@@ -41,4 +41,9 @@ class ComponentLineItem(models.Model):
     image = models.ImageField(upload_to=upload_and_rename_internal, verbose_name=_('图片'), null=True, blank=True)
     short_description = models.CharField(max_length=80, null=True, blank=True)
     description = models.CharField(max_length=80, null=True, blank=True)
-    # TODO: Add ordering
+    ordering = models.IntegerField(verbose_name=_('排序'), default=0)
+
+    class Meta:
+        verbose_name = _('页面子元素')
+        verbose_name_plural = _('页面子元素')
+        ordering = ('ordering',)

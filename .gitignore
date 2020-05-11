@@ -2,3 +2,6 @@
 .idea/
 .vscode
 .vscode.code-workspace
+
+docker-compose.yml
+backend/jiaju/db.sqlite3
