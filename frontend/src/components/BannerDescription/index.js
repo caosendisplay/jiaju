@@ -13,26 +13,26 @@ export default class BannerDescription extends Component {
       {
         id: "banner-description-year",
         image_url: null,
-        short_description: "30年",
-        description: "asdkljasd"
+        short_description: "██",
+        description: "████████"
       },
       {
         id: "banner-description-space",
         image_url: null,
-        short_description: "45000m²",
-        description: "sdlkjadlkajs"
+        short_description: "██",
+        description: "████████"
       },
       {
         id: "banner-description-team",
         image_url: null,
-        short_description: "500+",
-        description: "asdlhasjhd"
+        short_description: "██",
+        description: "████████"
       },
       {
         id: "banner-description-revenue",
         image_url: null,
-        short_description: "1.5亿",
-        description: "asdakqwh"
+        short_description: "██",
+        description: "████████"
       }
     ],
   };
