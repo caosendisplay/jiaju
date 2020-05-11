@@ -1,4 +1,5 @@
 import os
+import dj_database_url
 from .common import Common
 
 
@@ -10,6 +11,14 @@ class Production(Common):
     ALLOWED_HOSTS = ["*"]
     INSTALLED_APPS += ("gunicorn", )
 
+    # Postgres
+    DATABASES = {
+        'default': dj_database_url.config(
+            default='postgres://postgres:@postgres:5432/postgres',
+            conn_max_age=int(os.getenv('POSTGRES_CONN_MAX_AGE', 600))
+        )
+    }
+
     # Static files (CSS, JavaScript, Images)
     # https://docs.djangoproject.com/en/2.0/howto/static-files/
     # http://django-storages.readthedocs.org/en/latest/index.html
@@ -19,8 +28,9 @@ class Production(Common):
     AWS_ACCESS_KEY_ID = os.getenv('DJANGO_AWS_ACCESS_KEY_ID')
     AWS_SECRET_ACCESS_KEY = os.getenv('DJANGO_AWS_SECRET_ACCESS_KEY')
     AWS_STORAGE_BUCKET_NAME = os.getenv('DJANGO_AWS_STORAGE_BUCKET_NAME')
+    AWS_S3_CUSTOM_DOMAIN = os.getenv('DJANGO_AWS_S3_CUSTOM_DOMAIN')
     AWS_DEFAULT_ACL = 'public-read'
-    AWS_AUTO_CREATE_BUCKET = True
+    AWS_AUTO_CREATE_BUCKET = False
     AWS_QUERYSTRING_AUTH = False
     MEDIA_URL = f'https://s3.amazonaws.com/{AWS_STORAGE_BUCKET_NAME}/'
 
