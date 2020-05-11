@@ -73,9 +73,7 @@ export default {
       });
     },
     *fetchFeatured(_, { call, put }) {
-      console.log('case/fetchFeatured');
       const data = yield call(fetchFeatured, {});
-      console.log(data);
       yield put({
         type: "save",
         payload: {

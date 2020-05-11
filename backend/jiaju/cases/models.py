@@ -19,7 +19,6 @@ class Category(models.Model):
     create_at = models.DateTimeField(_('创建时间'), auto_now_add=True)
     update_at = models.DateTimeField(_('修改时间'), auto_now=True)
     name = models.CharField(_("名称"), max_length=80, unique=True)
-    image = models.ImageField(upload_to=upload_and_rename_category, verbose_name=_('图片'))
 
     def __str__(self):
         return self.name
@@ -33,8 +32,9 @@ class Case(models.Model):
     id = models.AutoField(primary_key=True)
     create_at = models.DateTimeField(_('创建时间'), auto_now_add=True)
     update_at = models.DateTimeField(_('修改时间'), auto_now=True)
-    category = models.ForeignKey(Category, related_name='cases', on_delete=models.SET_NULL, null=True)
+    category = models.ForeignKey(Category, verbose_name=_('案例类型'), related_name='cases', on_delete=models.SET_NULL, null=True)
     name = models.CharField(_("名称"), max_length=80)
+    short_description = models.TextField(_('简介'), null=True, blank=True)
 
     def __str__(self):
         return '{}-{}'.format(self.category, self.name)

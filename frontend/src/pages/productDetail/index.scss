@@ -1,0 +1,15 @@
+.product-detail-view {
+
+  &__short_description {
+    position: relative;
+
+    &__button {
+      position: absolute;
+      right: 30px;
+    }
+  }
+
+  &__detail_description {
+
+  }
+}

@@ -3,7 +3,7 @@ import {Image, Text, View} from "@tarojs/components";
 import {connect} from "@tarojs/redux";
 import {AtTabs, AtTabsPane, AtPagination, AtActivityIndicator} from "taro-ui";
 
-import "./case.scss";
+import "./index.scss";
 
 
 @connect(({cases, api_config, loading}) => ({
@@ -61,7 +61,7 @@ class CasePage extends Component {
     return (
       <View>
         <AtTabs current={cases.selected} tabList={cases.categories} onClick={this.handleClick.bind(this)}
-                scroll={cases.categories && cases.categories.length > 4}
+                scroll={cases.categories && cases.categories.length > 6}
         >
           {cases.categories.map((category, index) => (
             <AtTabsPane current={cases.selected} index={index}>

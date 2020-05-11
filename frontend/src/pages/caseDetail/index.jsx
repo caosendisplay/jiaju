@@ -1,6 +1,6 @@
 import Taro, {Component} from "@tarojs/taro";
 import {Image, View} from "@tarojs/components";
-import {AtActivityIndicator} from "taro-ui";
+import {AtActivityIndicator, AtButton} from "taro-ui";
 import {connect} from "@tarojs/redux";
 
 import "./index.scss";
@@ -19,7 +19,6 @@ class CaseDetailPage extends Component {
   }
 
   componentWillMount() {
-    console.log(this.$router.params);
   }
 
   componentDidMount = () => {
@@ -52,19 +51,19 @@ class CaseDetailPage extends Component {
     } else if (content.type === 'info') {
       return <View className='at-article__info'>{content.detail}</View>
     } else if (content.type === 'img') {
-      return <Image className='at-article__img' src={content.detail} mode='widthFix' />
+      return <Image className='at-article__img' src={content.detail} mode='widthFix'/>
     } else {
       return;
     }
-}
+  }
 
-renderDetailedDescription(case_id, detailed_description) {
+  renderDetailedDescription(case_id, detailed_description) {
     if (!detailed_description) return;
     return (
       <View className='at-article'>
         <View className='at-article__content'>
           {detailed_description.sections.map((section, idx) => (
-            <View className='at-article__section' key={`${case_id}-description-section-${idx}`} >
+            <View className='at-article__section' key={`${case_id}-description-section-${idx}`}>
               {section.contents.map((content) => this.renderContent(content))}
             </View>
           ))}
@@ -74,19 +73,24 @@ renderDetailedDescription(case_id, detailed_description) {
   }
 
   render() {
-    const { loading } = this.props;
+    const {loading} = this.props;
     if (loading.effects['cases/fetchCaseDetail']) {
       return (
-        <AtActivityIndicator mode='center' content='加载中...' />
+        <AtActivityIndicator mode='center' content='加载中...'/>
       )
     }
-    const { current_case } = this.props.cases;
+    const {current_case} = this.props.cases;
     return (
       <View className='case-detail-view at-row--wrap'>
         <View className='at-col at-col-12'>
           <Banner images={current_case.images} name="case-detail"/>
         </View>
-        <View className='at-col at-col-12'>
+        <View className='at-col at-col--wrap at-col-12 case-detail-view__short_description'>
+          <AtButton className='case-detail-view__short_description__button' type='primary' size='small'
+                    onClick={() => Taro.navigateTo({url: `/pages/contact/index?name=${current_case.name}`})}
+          >
+            立即咨询
+          </AtButton>
           <View className='at-article'>
             <View className='at-article__content'>
               <View className='at-article__section'>
@@ -100,14 +104,14 @@ renderDetailedDescription(case_id, detailed_description) {
             </View>
           </View>
         </View>
-        { current_case.detailed_description ?
+        {current_case.detailed_description ?
           <View className='at-col at-col-12'>
-            <SubHeader text="详情描述" />
+            <SubHeader text="详情描述"/>
           </View>
           :
-          <View />
+          <View/>
         }
-        <View className='at-col at-col-12'>
+        <View className='at-col at-col-12 case-detail-view__detail_description'>
           {this.renderDetailedDescription(current_case.id, current_case.detailed_description)}
         </View>
       </View>

@@ -1,7 +1,7 @@
 import Taro, {Component} from "@tarojs/taro";
 import {Image, View} from "@tarojs/components";
 import {connect} from "@tarojs/redux";
-import {AtActivityIndicator} from "taro-ui";
+import {AtActivityIndicator, AtMessage} from "taro-ui";
 
 import BannerDescription from "../../components/BannerDescription";
 import ContactDialog from "../../components/ContactDialog";
@@ -9,6 +9,8 @@ import SubHeader from "../../components/SubHeader";
 import ScrollSelectBannerView from "../../components/ScrollSelectBannerView";
 
 import "./index.scss";
+import Banner from "../../components/Banner";
+
 
 @connect(({home, cases, product, loading}) => ({
   home,
@@ -46,13 +48,13 @@ class Index extends Component {
 
   render() {
     const {home, cases, product, loading} = this.props;
-    console.log(loading.effects['home/components'], home);
     return (
       <View className="home-page">
+        <AtMessage />
         <View className="section banner-view">
           <View className="banner">
             {loading.effects['home/components'] === false
-              ? <Image src={home.banner[0].image_url} mode="widthFix"/>
+              ? <Banner images={home.banner} name="home" />
               : <AtActivityIndicator mode='center' content='加载中...'/>
             }
           </View>

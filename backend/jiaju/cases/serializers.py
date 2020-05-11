@@ -38,15 +38,10 @@ class FeaturedCategorySerializer(serializers.ModelSerializer):
 
 class CategorySerializer(serializers.ModelSerializer):
     title = serializers.CharField(source='name')
-    cover = serializers.SerializerMethodField()
 
     class Meta:
         model = Category
-        fields = ('id', 'title', 'cover', )
-
-    def get_cover(self, obj):
-        request = self.context.get('request')
-        return build_absolute_uri(request, obj.image.url)
+        fields = ('id', 'title', )
 
 
 class CaseSerializer(serializers.ModelSerializer):
@@ -67,7 +62,7 @@ class CaseDetailedSerializer(CaseSerializer):
 
     class Meta:
         model = Case
-        fields = ('id', 'images', 'name', 'detailed_description')
+        fields = ('id', 'images', 'name', 'short_description', 'detailed_description')
 
     def get_detailed_description(self, obj):
         if hasattr(obj, 'casedetaileddescription'):

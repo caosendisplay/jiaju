@@ -1,15 +1,17 @@
 import Taro, {Component} from "@tarojs/taro";
-import {Image, ScrollView, Text, View} from "@tarojs/components";
+import {Image, Text, View} from "@tarojs/components";
 import {connect} from "@tarojs/redux";
-import {AtTabs, AtTabsPane, AtNavBar, AtPagination, AtActivityIndicator} from "taro-ui";
+import {AtTabs, AtTabsPane, AtPagination, AtActivityIndicator} from "taro-ui";
 
 import "./index.scss";
 
-@connect(({product, loading}) => ({
+
+@connect(({product, api_config, loading}) => ({
   product,
+  api_config,
   loading
 }))
-class ProductPage extends Component {
+class CasePage extends Component {
 
   config = {
     navigationBarTitleText: '产品'
@@ -20,7 +22,7 @@ class ProductPage extends Component {
 
   componentDidMount = () => {
     this.props.dispatch({
-      type: "product/fetchProducts"
+      type: "product/fetchCategories"
     });
   };
 
@@ -33,51 +35,75 @@ class ProductPage extends Component {
   componentDidHide() {
   }
 
-  onScrollToUpper = () => {}
-  onScrollToLower = (_) => {
+  handleClick(value) {
     this.props.dispatch({
-      type: "product/fetchProducts"
-    });
+      type: "product/select",
+      payload: value
+    })
   }
 
-  onScroll = (e) => {
-    console.log(e.detail)
+  onPageChange(value) {
+    const {current} = value;
+    this.props.dispatch({
+      type: "product/fetchProducts",
+      payload: {
+        page: current
+      }
+    })
   }
 
   render() {
-    const { product, loading } = this.props;
-    const scrollTop = 0
-    const Threshold = 20
-    console.log(loading.effects['product/fetchProducts']);
+    const {product, api_config, loading} = this.props;
+    if (loading.effects['product/fetchProducts']) {
+      return <AtActivityIndicator mode='center' content='加载中...'/>
+    }
+    const current = product.selected >= 0 ? product.products[product.categories[product.selected].id] : undefined;
     return (
-      <ScrollView
-        className='product-scroll-view at-row at-row--wrap'
-        scrollY
-        scrollWithAnimation
-        enableFlex
-        scrollTop={scrollTop}
-        lowerThreshold={Threshold}
-        upperThreshold={Threshold}
-        onScrollToUpper={this.onScrollToUpper.bind(this)} // 使用箭头函数的时候 可以这样写 `onScrollToUpper={this.onScrollToUpper}`
-        onScrollToLower={this.onScrollToLower.bind(this)}
-        onScroll={this.onScroll}
-      >
-        {
-          product.products.map((p, idx) => (
-            <View className='product-scroll-view__card at-col at-col-6' key={`product-scroll-card-${idx}`}>
-              {p.name}
-            </View>
-          ))
-        }
-        <AtActivityIndicator className='at-col at-col-12' mode='normal' content='加载中...'/>
-        {/*{*/}
-        {/*  loading.effects['product/fetchProducts'] === true*/}
-        {/*    ? <AtActivityIndicator mode='center' content='加载中...'/>*/}
-        {/*    : <View/>*/}
-        {/*}*/}
-        </ScrollView>
+      <View>
+        <AtTabs current={product.selected} tabList={product.categories} onClick={this.handleClick.bind(this)}
+                scroll={product.categories && product.categories.length > 6}
+        >
+          {product.categories.map((category, index) => (
+            <AtTabsPane current={product.selected} index={index}>
+              {loading.effects['product/fetchProducts']
+                ? <AtActivityIndicator mode='center' content='加载中...'/>
+                : <View>
+                  <View className='at-row at-row--wrap, product-categories-view'>
+                    {current.results.map(c =>
+                      <View className='at-col at-col-12 product-card-view'
+                            onClick={() => Taro.navigateTo({url: `/pages/productDetail/index?id=${c.id}`})}>
+                        <Image
+                          className='product-card-view__img'
+                          src={c.cover.image_url}
+                          model='aspectFit'
+
+                        />
+                        <View className='product-card-view__box'>
+                          <Text className='product-card-view__box__name'>{c.name}</Text>
+                        </View>
+                      </View>
+                    )}
+                  </View>
+                  {
+                    current && (current.next || current.previous)
+                      ? <AtPagination
+                        total={current.count}
+                        current={current.page}
+                        pageSize={api_config.page_size ? api_config.page_size : current.result.length}
+                        onPageChange={this.onPageChange.bind(this)}
+                      />
+                      : <View/>
+                  }
+                </View>
+              }
+            </AtTabsPane>
+          ))}
+        </AtTabs>
+        <View className="bottom-padding-view"/>
+      </View>
+
     )
   }
 }
 
-export default ProductPage;
+export default CasePage;

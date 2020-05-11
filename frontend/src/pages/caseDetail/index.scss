@@ -1,36 +1,15 @@
-.cases-categories-view {
+.case-detail-view {
 
-  .cases-card-view {
-    position: relative;
-    display: block;
-    text-align: center;
+    &__short_description {
+      position: relative;
 
-    &__img {
-      width: 98%;
-      border-radius: 10px;
-    }
-
-    &__box {
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      margin: auto auto 10px auto;
-      display: flex;
-      align-items: center;
-      justify-content: left;
-      text-align: left;
-      width: 98%;
-      height: 80px;
-      background-color: rgba(0,0,0,.5);
-      border-bottom-left-radius: 10px;
-      border-bottom-right-radius: 10px;
-
-      &__name {
-        font-size: 40px;
-        color: #f8f8f8;
-        margin-left: 10px;
+      &__button {
+        position: absolute;
+        right: 30px;
       }
     }
+
+  &__detail_description {
+
   }
 }
