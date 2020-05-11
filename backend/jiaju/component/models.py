@@ -41,3 +41,4 @@ class ComponentLineItem(models.Model):
     image = models.ImageField(upload_to=upload_and_rename_internal, verbose_name=_('图片'), null=True, blank=True)
     short_description = models.CharField(max_length=80, null=True, blank=True)
     description = models.CharField(max_length=80, null=True, blank=True)
+    # TODO: Add ordering
