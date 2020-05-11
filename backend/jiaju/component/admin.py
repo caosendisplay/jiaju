@@ -17,5 +17,10 @@ class ComponentAdmin(admin.ModelAdmin):
             return self.readonly_fields + ('view', 'name', )
         return self.readonly_fields
 
+    
+class ViewAdmin(admin.ModelAdmin):
+    model = View
 
+
+admin.site.register(View, ViewAdmin)
 admin.site.register(Component, ComponentAdmin)
