@@ -29,7 +29,6 @@ export default class Banner extends Component {
       .boundingClientRect(n => {
         const newHeight = e.detail.height / e.detail.width * n.width;
         this.setState((state) => {
-          console.log(e, n, newHeight, state.height);
           return {
             ...state,
             height: state.height > 0 ? Math.min(state.height, newHeight) : newHeight
