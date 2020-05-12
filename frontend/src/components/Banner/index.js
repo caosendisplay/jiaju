@@ -1,5 +1,5 @@
 import Taro, {Component} from '@tarojs/taro';
-import {Swiper, SwiperItem, Image} from '@tarojs/components';
+import {Swiper, SwiperItem, Image, View} from '@tarojs/components';
 import PropTypes from 'prop-types';
 import './index.scss';
 
@@ -7,9 +7,10 @@ export default class Banner extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      style: {}
+      height: 0
     }
   }
+
   static propTypes = {
     images: PropTypes.array,
     name: PropTypes.string,
@@ -22,17 +23,20 @@ export default class Banner extends Component {
 
   onImageLoad(e) {
     if (this.props.name !== 'home') return;
-    const windowWidth = Taro.getSystemInfoSync().windowWidth;
-    const newHeight = e.detail.height / e.detail.width * windowWidth;
-    this.setState((state) => {
-      return {
-        ...state,
-        style: {
-          ...state.style,
-          height: (state.style.height ? Math.min(state.style.height, newHeight) : newHeight)+'px'
-        }
-      }
-    });
+    const query = Taro.createSelectorQuery().in(this.$scope);
+    query
+      .select('.swiper-container__img')
+      .boundingClientRect(n => {
+        const newHeight = e.detail.height / e.detail.width * n.width;
+        this.setState((state) => {
+          console.log(e, n, newHeight, state.height);
+          return {
+            ...state,
+            height: state.height > 0 ? Math.min(state.height, newHeight) : newHeight
+          }
+        });
+      })
+      .exec();
   }
 
   render() {
@@ -44,13 +48,16 @@ export default class Banner extends Component {
         indicatorDots={images.length > 1}
         indicatorColor='#999'
         indicatorActiveColor='#bf708f'
-        autoplay
-        style={this.state.style}
+        autoplay={images.length > 1}
+        style={{height: this.state.height+'px'}}
       >
         {
           images.map((item) => (
             <SwiperItem key={item.id}>
-              <Image mode='widthFix' className='swiper-container__img' src={`${item.image_url}`} onLoad={this.onImageLoad.bind(this)}/>
+              <View className='swiper-container__box'>
+                <Image mode='widthFix' className='swiper-container__img' src={`${item.image_url}`}
+                       onLoad={this.onImageLoad.bind(this)}/>
+              </View>
             </SwiperItem>
           ))
         }

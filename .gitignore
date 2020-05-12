@@ -5,3 +5,4 @@
 
 docker-compose.yml
 backend/jiaju/db.sqlite3
+backend/media/*

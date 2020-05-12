@@ -7,7 +7,7 @@ from .models import View, Component, ComponentLineItem
 class ComponentLineItemAdmin(SortableHiddenMixin, NestedTabularInline):
     model = ComponentLineItem
     sortable_field_name = 'ordering'
-    extra = 1
+    extra = 0
 
 
 class ComponentAdmin(NestedModelAdmin):
