@@ -2,7 +2,7 @@ site_name: 小程序后台使用说明
 site_description: A jiaju webapp backend.
 repo_url: https://github.com/leishi1313/backend
 site_dir: site
-site_url: https://jiaju.caosen.com/__doc/
+site_url: https://doc.jiaju.caosen.com
 copyright: Copyright &copy; 2019, <a href="https://github.com/leishi1313">leishi1313</a>.
 dev_addr: 0.0.0.0:8001
 
