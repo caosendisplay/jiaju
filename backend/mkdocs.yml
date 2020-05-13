@@ -1,12 +1,15 @@
-site_name: jiaju
+site_name: 小程序后台使用说明
 site_description: A jiaju webapp backend.
 repo_url: https://github.com/leishi1313/backend
 site_dir: site
+site_url: https://jiaju.caosen.com/__doc/
 copyright: Copyright &copy; 2019, <a href="https://github.com/leishi1313">leishi1313</a>.
 dev_addr: 0.0.0.0:8001
 
 nav:
-  - Home: 'index.md'
-  - API:
-    - Authentication: 'api/authentication.md'
-    - Users: 'api/users.md'
+  - 主页: 'index.md'
+  - 功能:
+    - 首页: 'func/home/index.md'
+    - 案例: 'func/case/index.md'
+    - 产品: 'func/product/index.md'
+    - 消息: 'func/message/index.md'

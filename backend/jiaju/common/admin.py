@@ -1,4 +1,3 @@
-import nested_admin
 from django.contrib import admin
 from nested_admin.forms import SortableHiddenMixin
 from nested_admin.nested import NestedTabularInline
@@ -6,7 +5,7 @@ from nested_admin.polymorphic import NestedStackedPolymorphicInline, NestedPolym
 from .models import Article, Section, Content, H1, H2, H3, Info, Picture, Paragraph
 
 
-class ContentInline(NestedStackedPolymorphicInline):
+class ContentInline(SortableHiddenMixin, NestedStackedPolymorphicInline):
     model = Content
     class H1Inline(SortableHiddenMixin, NestedStackedPolymorphicInline.Child):
         model = H1
@@ -34,7 +33,7 @@ class SectionInlineAdmin(SortableHiddenMixin, NestedTabularInline):
     model = Section
     inlines = [ContentInline, ]
     sortable_field_name = 'ordering'
-    extra = 1
+    extra = 0
     max_num = 5
 
 
